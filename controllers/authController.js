@@ -27,6 +27,36 @@ const registerUser = async (req, res, next) => {
   }
 };
 
+const loginUser = async (req, res, next) => {
+  try {
+    const existingUser = await User.findOne({
+      email: req.body.email,
+      isDeleted: false,
+    }).select("+password");
+
+    if (!existingUser)
+      return responseError(
+        res,
+        404,
+        {},
+        "Please check your email and try again"
+      );
+
+    const isCorrectPassword = bcrypt.compareSync(
+      req.body.password,
+      existingUser?.password
+    );
+
+    if (!isCorrectPassword)
+      return responseError(res, 403, {}, "Incorrect password");
+
+    return responseSuccess(res, 200, existingUser, "Login successful");
+  } catch (error) {
+    next(Error);
+  }
+};
+
 module.exports = {
   registerUser,
+  loginUser,
 };

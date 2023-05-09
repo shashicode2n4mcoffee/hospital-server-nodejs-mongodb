@@ -1,4 +1,4 @@
-const { fetchUsers } = require('./userController')
-const { registerUser } = require('./authCOntroller');
+const { fetchUsers } = require("./userController");
+const { registerUser, loginUser } = require("./authCOntroller");
 
-module.exports = { fetchUsers, registerUser }
+module.exports = { fetchUsers, registerUser, loginUser };
