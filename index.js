@@ -5,7 +5,7 @@ const dotEnv = require("dotenv");
 const bodyParser = require("body-parser");
 const dbConnect = require("./config/db");
 
-const { userRouter, authRouter } = require("./routes");
+const { userRouter, authRouter, patientsRouter } = require("./routes");
 const {
   globalErrorHandler,
 } = require("./config/errorHandlers/globalErrorHandler");
@@ -26,6 +26,7 @@ app.use(cookieParser());
 // Routes
 app.use("/api/v1/user", userRouter);
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/patients", patientsRouter);
 
 // Base test api
 app.get("/home", (req, res) => {
