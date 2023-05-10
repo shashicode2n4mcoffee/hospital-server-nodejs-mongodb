@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 const { User } = require("../models");
 const { responseSuccess, responseError } = require("../utils/response");
 
@@ -11,8 +12,20 @@ const registerUser = async (req, res, next) => {
     };
     const newUser = new User(newUserObject);
     const savedUser = await newUser.save();
+
     if (savedUser) {
-      responseSuccess(res, 201, savedUser, "User added successfully");
+      const token = jwt.sign(
+        {
+          id: savedUser._id,
+        },
+        process.env.JWT_KEY
+      );
+      responseSuccess(
+        res,
+        201,
+        { ...savedUser._doc, accessToken: token },
+        "User added successfully"
+      );
     } else {
       responseError(
         res,
@@ -50,7 +63,22 @@ const loginUser = async (req, res, next) => {
     if (!isCorrectPassword)
       return responseError(res, 403, {}, "Incorrect password");
 
-    return responseSuccess(res, 200, existingUser, "Login successful");
+    if (existingUser) {
+      const token = jwt.sign(
+        {
+          id: existingUser._id,
+        },
+        process.env.JWT_KEY
+      );
+      responseSuccess(
+        res,
+        200,
+        { ...existingUser._doc, accessToken: token },
+        "Login successful"
+      );
+    } else {
+      responseError(res, 500, {}, "Unable to login . Please try again later");
+    }
   } catch (error) {
     next(Error);
   }
