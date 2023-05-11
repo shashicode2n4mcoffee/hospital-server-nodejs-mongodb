@@ -1,0 +1,15 @@
+Treatments APIs
+
+Add Treatment >>> Brunda
+Get all treatments >>> Nisarga
+Get Treatment By id >> Nisarga
+Update Treatment >> Radika
+Delete Treatment >> Brunda
+
+Investigation APIs
+
+Add Investigation >>> Ummi Hani
+Get all Investigation >>> Ruchita
+Get Investigation By id >> Ruchita
+Update Investigation >> Ummi Hani
+Delete Investigation >> Ummi Hani
