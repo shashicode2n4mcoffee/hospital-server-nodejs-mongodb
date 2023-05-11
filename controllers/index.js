@@ -1,6 +1,12 @@
 const { fetchUsers } = require("./userController");
 const { registerUser, loginUser } = require("./authCOntroller");
-const { getPatients, addPatient } = require("./patientsController");
+const {
+  getPatients,
+  addPatient,
+  getPatientById,
+  updatePatientById,
+  deletPatientById,
+} = require("./patientsController");
 
 module.exports = {
   fetchUsers,
@@ -8,4 +14,7 @@ module.exports = {
   loginUser,
   getPatients,
   addPatient,
+  getPatientById,
+  updatePatientById,
+  deletPatientById,
 };
