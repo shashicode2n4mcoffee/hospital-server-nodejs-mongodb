@@ -1,4 +1,4 @@
-const { fetchUsers } = require("./userController");
+const { fetchUsers, deleteUser, fetchUserById } = require("./userController");
 const { registerUser, loginUser } = require("./authCOntroller");
 const {
   getPatients,
@@ -10,6 +10,8 @@ const {
 
 module.exports = {
   fetchUsers,
+  deleteUser,
+  fetchUserById,
   registerUser,
   loginUser,
   getPatients,
